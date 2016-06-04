@@ -1,37 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Game Base</title>
-    <meta charset="utf-8">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:700,300' rel='stylesheet' type='text/css'>
-    <script src="scripts/front-end-js/script.js"></script>
-    <script src="scripts/front-end-js/functions.js"></script>
-    <script src="scripts/networking/post-data.js"></script>
-    <script src="scripts/front-end-js/account.js"></script>
-  </head>
-  <body>
-    <div id="menu">
-      <logo>Game Base</logo>
-      <div id="login-screen">
-        <form onsubmit="return login()">
-          <flex>
-            <div>
-              <input type="text" id="login-username" onchange="inputCheck(event)" min-length=4 />
-              <label>Username</label>
+    <head>
+        <title>Game Base</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:700,300' rel='stylesheet' type='text/css'>
+        <script src="scripts/front-end-js/ui.js"></script>
+        <script src="scripts/front-end-js/functions.js"></script>
+        <script src="scripts/networking/post-data.js"></script>
+        <script src="scripts/front-end-js/account.js"></script>
+    </head>
+    <body>
+        <div id="menu">
+            <logo>Game Base</logo>
+            <div id="menu-screen" class="screen">
+                <h2 class="menu-title">Main Menu</h2>
+                <button class="button" onclick="">Find Game</button>
+                <button class="button" onclick="">Create Game</button>
+                <button class="button secondary" onclick="logout()">Logout</button>
             </div>
-            <div>
-              <input type="password" id="login-password" onchange="inputCheck(event)" min-length=4 />
-              <label>Password</label>
+            <div id="login-screen" class="screen">
+                <h2 class="menu-title">Login</h2>
+                <form onsubmit="return login()">
+                    <flex>
+                        <div>
+                            <input type="text" id="login-username" onchange="inputCheck(event)" min-length=4 />
+                            <label>Username</label>
+                        </div>
+                        <div>
+                            <input type="password" id="login-password" onchange="inputCheck(event)" min-length=4 />
+                            <label>Password</label>
+                        </div>
+                    </flex>
+                    <hr>
+                    <input type="submit" value="Login" class="button" />
+                </form>
+                <button class="button secondary" onclick="showMenu('signup')">Sign up</button>
             </div>
-          </flex>
-          <hr>
-          <input type="submit" value="login" class="button" />
-        </form>
-        <button class="button secondary">Sign up</button>
-      </div>
-    </div>
-  </body>
+            <div id="signup-screen" class="screen">
+                <h2 class="menu-title">Sign up</h2>
+                <form onsubmit="return signup()">
+                    <flex>
+                        <div>
+                            <input type="text" id="signup-username" onchange="inputCheck(event)" min-length=4 />
+                            <label>Username</label>
+                        </div>
+                    </flex>
+                    <flex>
+                        <div>
+                            <input type="text" id="signup-email" onchange="inputCheck(event)" min-length=4 />
+                            <label>Email Address</label>
+                        </div>
+                    </flex>
+                    <flex>
+                        <div>
+                            <input type="password" id="signup-password" onchange="inputCheck(event)" min-length=4 />
+                            <label>Password</label>
+                        </div>
+                        <div>
+                            <input type="password" id="signup-passwordrepeat" onchange="inputCheck(event)" min-length=4 />
+                            <label>Repeat Password</label>
+                        </div>
+                    </flex>
+                    <hr>
+                    <input type="submit" value="Sign up" class="button" />
+                </form>
+                <button class="button secondary" onclick="showMenu('login')">Login</button>
+            </div>
+        </div>
+    </body>
 </html>
