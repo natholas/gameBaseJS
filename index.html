@@ -17,9 +17,15 @@
             <logo>Game Base</logo>
             <div id="menu-screen" class="screen">
                 <h2 class="menu-title">Main Menu</h2>
-                <button class="button" onclick="">Find Game</button>
-                <button class="button" onclick="">Create Game</button>
-                <button class="button secondary" onclick="logout()">Logout</button>
+                <flex>
+                    <button class="button" onclick="">Find Game</button>
+                    <button class="button" onclick="">Create Game</button>
+                </flex>
+                <br><br><br>
+                <div class="player_info">
+                    <p>Logged in as: <b><span id="player_name"></span></b></p>
+                </div>
+                <a class="center" onclick="return logout()">Logout</a>
             </div>
             <div id="login-screen" class="screen">
                 <h2 class="menu-title">Login</h2>
@@ -34,6 +40,8 @@
                             <label>Password</label>
                         </div>
                     </flex>
+                    <a href class="right resetLink" onclick="return showMenu('reset')">Reset password</a>
+                    <clearfix></clearfix>
                     <hr>
                     <input type="submit" value="Login" class="button" />
                 </form>
@@ -69,6 +77,52 @@
                 </form>
                 <button class="button secondary" onclick="showMenu('login')">Login</button>
             </div>
+            <div id="reset-screen" class="screen">
+                <h2 class="menu-title">Reset Password</h2>
+                <form onsubmit="return reset_email()">
+                    <flex>
+                        <div>
+                            <input type="text" id="reset-email" onchange="inputCheck(event)" min-length=4 />
+                            <label>Email Address</label>
+                        </div>
+                    </flex>
+                    <hr>
+                    <input type="submit" value="Send Reset Code" class="button" />
+                </form>
+                <button class="button secondary" onclick="showMenu('login')">Back</button>
+            </div>
+            <div id="change-screen" class="screen">
+                <h2 class="menu-title">Reset Password</h2>
+                <form onsubmit="return change_password()">
+                    <flex>
+                        <div>
+                            <input type="text" id="change-code" onchange="inputCheck(event)" min-length=8 max-length=8 />
+                            <label>8 Digit code</label>
+                        </div>
+                    </flex>
+                    <flex>
+                        <div>
+                            <input type="password" id="change-newpassword" onchange="inputCheck(event)" min-length=4 />
+                            <label>New Password</label>
+                        </div>
+                        <div>
+                            <input type="password" id="change-newpasswordrepeat" onchange="inputCheck(event)" min-length=4 />
+                            <label>Repeat New Password</label>
+                        </div>
+                    </flex>
+                    <hr>
+                    <input type="submit" value="Change Password" class="button" />
+                </form>
+                <button class="button secondary" onclick="showMenu('login')">Back</button>
+            </div>
+            <div id="loading-screen" class="screen visible">
+                Loading...
+            </div>
+
+
         </div>
+        <script>
+            get_info();
+        </script>
     </body>
 </html>

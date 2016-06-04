@@ -1,4 +1,4 @@
-var menuNames = ["menu", "login", "signup"];
+var menuNames = ["menu", "login", "signup", "reset", "change"];
 
 function inputCheck(e) {
   if (e.target.value.length > 0) {
@@ -16,4 +16,13 @@ function showMenu(show) {
     var menuName = capitalize(show);
 
     document.title = menuName + " - Base Game";
+    return false;
+}
+
+function startLoading() {
+    find("#loading-screen").className = "screen visible";
+}
+
+function endLoading() {
+    find("#loading-screen").className = "screen";
 }

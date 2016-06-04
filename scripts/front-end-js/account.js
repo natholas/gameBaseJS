@@ -2,12 +2,12 @@ function get_info(x) {
     data = {};
     sendData(data, handle_get_info, "/api/get_info.php");
 }
-get_info();
 
 function handle_get_info(data) {
     console.log(data);
     if (data.status == "success") {
         showMenu("menu");
+        find("#player_name").innerHTML = data.user_name;
     } else {
         showMenu("login");
     }
@@ -69,4 +69,62 @@ function handle_signup(data) {
 function logout() {
     var data = {};
     sendData(data, get_info, "/api/logout.php");
+    return false;
+}
+
+function reset_email() {
+
+    var emailaddress = find("#reset-email").value;
+
+    if (emailaddress.length > 3) {
+        var data = {
+            "email": emailaddress
+        }
+
+        sendData(data, handle_reset_email, "/api/reset_password.php");
+
+    } else {
+        alert("Email address too short");
+    }
+
+    return false;
+}
+
+function handle_reset_email(data) {
+    console.log(data);
+    if (data.status == "success") {
+        showMenu("change");
+    } else {
+        alert("Email address not found");
+    }
+}
+
+function change_password() {
+
+    var code = find("#change-code").value;
+    var newpassword = find("#change-newpassword").value;
+    var newpasswordrepeat = find("#change-newpasswordrepeat").value;
+
+    if (code.length == 8 && newpassword == newpasswordrepeat) {
+
+        data = {
+            "code": code,
+            "new_password": newpassword
+        }
+        sendData(data, handle_change_password, "/api/reset_password.php");
+
+    } else {
+        alert("Passwords don't match")
+    }
+
+    return false;
+
+}
+
+function handle_change_password(data) {
+    if (data.status == "success") {
+        showMenu("login");
+    } else {
+        alert("Wrong code");
+    }
 }

@@ -10,6 +10,12 @@ html
   font-family: 'Roboto', sans-serif;
 }
 
+a
+{
+    color:#8BC34A;
+    cursor: pointer;
+}
+
 input
 {
   padding: 1em;
@@ -138,4 +144,44 @@ hr
     margin:0 0 2em 0;
     text-align: center;
     font-weight: normal;
+}
+
+.right
+{
+    float:right;
+}
+
+.center
+{
+    display: block;
+    text-align: center;
+}
+
+.resetLink
+{
+    margin-top:0.5em;
+}
+
+clearfix
+{
+    clear: both;
+    display: block;
+}
+
+#loading-screen
+{
+    z-index: 20;
+    background-color:rgba(255,255,255,0.8);
+    text-align: center;
+    font-weight: bold;
+    position: absolute;
+    top:0; left: 0; right: 0; bottom:0;
+    padding-top:25%;
+    font-size: 3em;
+    color:#8BC34A;
+}
+
+.player_info
+{
+    text-align: center;
 }
