@@ -8,5 +8,5 @@ function sendData(data, then, url) {
       then(JSON.parse(xhttp.responseText));
     }
   }
-  xhttp.send(data);
+  xhttp.send("data="+JSON.stringify(data)));
 }
