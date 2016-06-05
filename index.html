@@ -40,7 +40,7 @@
                             <label>Password</label>
                         </div>
                     </flex>
-                    <a href class="right resetLink" onclick="return showMenu('reset')">Reset password</a>
+                    <a href class="right resetLink" onclick="return showMenu('reset')">Forgot your password?</a>
                     <clearfix></clearfix>
                     <hr>
                     <input type="submit" value="Login" class="button" />
@@ -116,11 +116,13 @@
                 <button class="button secondary" onclick="showMenu('login')">Back</button>
             </div>
             <div id="loading-screen" class="screen visible">
-                Loading...
+                <span>Loading...</span>
             </div>
-
-
         </div>
+
+        <div class="error"></div>
+        <div class="message"></div>
+
         <script>
             get_info();
         </script>

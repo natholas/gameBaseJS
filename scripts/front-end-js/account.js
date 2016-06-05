@@ -1,10 +1,9 @@
-function get_info(x) {
+function get_info() {
     data = {};
     sendData(data, handle_get_info, "/api/get_info.php");
 }
 
 function handle_get_info(data) {
-    console.log(data);
     if (data.status == "success") {
         showMenu("menu");
         find("#player_name").innerHTML = data.user_name;
@@ -23,7 +22,9 @@ function login() {
       "password": password
     }
     sendData(data, handle_login, "/api/login.php");
-  }
+} else {
+    showMessage("error", "Wrong username or password");
+}
 
   return false;
 }
@@ -31,8 +32,9 @@ function login() {
 function handle_login(data) {
     if (data.status == "success") {
         get_info();
+        showMessage("message", "Logged in");
     } else {
-        alert("Wrong username or password");
+        showMessage("error", "Wrong username or password");
     }
 }
 
@@ -50,9 +52,9 @@ function signup() {
         }
         sendData(data, handle_signup, "/api/signup.php");
     } else if (password == passwordrepeat) {
-        alert("username or password too short");
+        showMessage("error", "Username and password must be at least 4 characters long", 4000);
     } else {
-        alert("Passwords don't match");
+        showMessage("error", "The passwords don't match");
     }
 
     return false;
@@ -61,15 +63,21 @@ function signup() {
 function handle_signup(data) {
     if (data.status == "success") {
         get_info();
+        showMessage("message", "Account created");
     } else {
-        alert("Username already exist");
+        showMessage("error", "An account already exists with that username or email address", 5000);
     }
 }
 
 function logout() {
     var data = {};
-    sendData(data, get_info, "/api/logout.php");
+    sendData(data, process_logout, "/api/logout.php");
     return false;
+}
+
+function process_logout(data) {
+    showMessage("message", "Logged out");
+    get_info();
 }
 
 function reset_email() {
@@ -84,7 +92,7 @@ function reset_email() {
         sendData(data, handle_reset_email, "/api/reset_password.php");
 
     } else {
-        alert("Email address too short");
+        showMessage("error", "Invalid email address");
     }
 
     return false;
@@ -94,8 +102,9 @@ function handle_reset_email(data) {
     console.log(data);
     if (data.status == "success") {
         showMenu("change");
+        showMessage("message", "We have sent a code to your email address. Please enter it below", 5000);
     } else {
-        alert("Email address not found");
+        showMessage("error", "No account exists with that email address", 4000);
     }
 }
 
@@ -114,7 +123,7 @@ function change_password() {
         sendData(data, handle_change_password, "/api/reset_password.php");
 
     } else {
-        alert("Passwords don't match")
+        showMessage("error", "The passwords that you entered don't match");
     }
 
     return false;
@@ -124,7 +133,8 @@ function change_password() {
 function handle_change_password(data) {
     if (data.status == "success") {
         showMenu("login");
+        showMessage("message", "Password changed. Please login");
     } else {
-        alert("Wrong code");
+        showMessage("error", "The code you entered is not correct");
     }
 }

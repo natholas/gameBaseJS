@@ -185,3 +185,28 @@ clearfix
 {
     text-align: center;
 }
+
+.error,
+.message
+{
+    position: fixed;
+    top:-3.2em;
+    left:0;
+    right:0;
+    padding:1em;
+    color:#fff;
+    background-color:#8BC34A;
+    text-align: center;
+    transition: top .2s ease;
+}
+
+.error
+{
+    background-color:#F44336;
+}
+
+.error.visible,
+.message.visible
+{
+    top:0em;
+}

@@ -8,11 +8,12 @@
 
         // Before we can create an account we first need to check to see if the username is available.
         $username = $_POST['username'];
-        if (!($stmt = $mysqli->prepare("SELECT COUNT(*) FROM users WHERE username = ?"))) {
+        $email = $_POST['email'];
+        if (!($stmt = $mysqli->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?"))) {
             die ("Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error);
         }
 
-        if (!$stmt->bind_param("s", $username)) {
+        if (!$stmt->bind_param("ss", $username, $email)) {
             die ("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
         }
 
@@ -24,7 +25,7 @@
 
         if ($result == 0) {
 
-            // This username is unique and can be used.
+            // This username and email address are unique and can be used.
             // Lets create a new user
 
             $username = $_POST['username'];

@@ -1,4 +1,6 @@
 var menuNames = ["menu", "login", "signup", "reset", "change"];
+var errorTimeout = null;
+var messageTimeout = null;
 
 function inputCheck(e) {
   if (e.target.value.length > 0) {
@@ -25,4 +27,39 @@ function startLoading() {
 
 function endLoading() {
     find("#loading-screen").className = "screen";
+}
+
+function showMessage(type, message, time) {
+    if (!time) {
+        time = 3000;
+    }
+    if (type == "error") {
+        clearTimeout(errorTimeout);
+        errorTimeout = null;
+        find(".error").innerHTML = message;
+        find(".error").className = "error visible";
+        errorTimeout = setTimeout(function() {
+            hideMessage("error");
+        }, time);
+    } else {
+        clearTimeout(messageTimeout);
+        messageTimeout = null;
+        find(".message").innerHTML = message;
+        find(".message").className = "message visible";
+        errorTimeout = setTimeout(function() {
+            hideMessage("message");
+        }, time);
+    }
+}
+
+function hideMessage(type) {
+    if (type == "error") {
+        clearTimeout(errorTimeout);
+        errorTimeout = null;
+        find(".error").className = "error";
+    } else {
+        clearTimeout(messageTimeout);
+        messageTimeout = null;
+        find(".message").className = "message";
+    }
 }

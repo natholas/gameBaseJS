@@ -24,6 +24,10 @@
                 die ("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
             }
 
+            // We can now unset the session values that were used for the reset
+            unset($_SESSION['reset_code']);
+            unset($_SESSION['reset_for']);
+
             $data->status = "success";
         }
 
